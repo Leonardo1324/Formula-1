@@ -20,6 +20,6 @@ public class CrearPiloto implements piloto.input.CrearPiloto {
         if (myDB.existePiloto(miPiloto.getNombre())) {
             throw new ExceptionPilotoConElMismoNombre("Ya existe el piloto: " + miPiloto.getNombre());
         }
-        return false;
+        return myDB.guardarPiloto(miPiloto);
     }
 }
