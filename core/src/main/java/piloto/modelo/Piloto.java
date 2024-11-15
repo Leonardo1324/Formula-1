@@ -37,10 +37,12 @@ public class Piloto {
             throw new ExceptionNombreCompletoIncorrecto("el nombre completo del piloto esta mal");
         }
         if (!apellido.substring(0,3).toUpperCase().equals(nombreAbreviado)){
-            throw new ExceptionNombreAbreviadoIncorrecto("el nombre abreviado del pilo es incorrecto");
+            throw new ExceptionNombreAbreviadoIncorrecto("el nombre abreviado del piloto es incorrecto");
         }
         return new Piloto(id,nombre,apellido,nombreCompleto,nombreAbreviado,fotoPiloto);
     }
 
-
+    public String getNombre() {
+        return nombre;
+    }
 }
