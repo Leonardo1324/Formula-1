@@ -1,64 +1,71 @@
-# Programación Avanzada I (Backend)
+# Trabajo Práctico Integrador
+## Programación Avanzada I (Backend)
 ### Ing. y Lic. en Sistemas
 
 ### Objetivos
-- Desarrollar endpoints que permitan el registro y consulta de la entidad Curso
+- Desarrollar un microservicio simple, que permita llenar una base de datos, con datos de Pilotos de F1 obtenidos desde una API pública
 
 ### Evaluacion
-- Fecha de Entrega: 02/11/2024
+- Fecha de Entrega: 23/11/2024
 - El proyecto debe compilar sin errores en cualquier entorno de programación en el que se abra
 - Todos los test unitarios deben pasar en verde
-- Cada funcionalidad debe tener su branch específica, la cual partirá desde el branch develop
-- Se evaluará cada funcionalidad a través de Pull Request (o Merge Request) del branch feature hacia develop
 
 ### Punto de partida
-- Se proveerá el esquema base de un Backend, de manera que el alumno pueda construir los dos endpoints desde cero.
+- Se deberá crear el proyecto desde cero, siguiendo las recomendaciones vertidas durante la cursada.
+- Se deberá consumir de la API https://openf1.org/
 
 ## Consigna
-#### Módulo Cursos
-_Se desea implementar un backend para un microservicio que permita registrar y consultar cursos._
+#### Módulo F1
+_Se desea implementar un backend para un microservicio que permita capturar la información de Pilotos, desde una API externa._
 
 #### Restricciones:
-- No puede existir dos Cursos con el mismo nombre
-- Todos los atributos de Curso son obligatorios
-- La fecha de cierre de inscripcion del Curso no puede ser inferior a la actual
-- El nivel puede tomar solo los valores [Inicial, Medio, Avanzado]
+- No puede existir dos Pilotos con el mismo nombre completo (ej. "Franco Colapinto", "Fernando Alonso", "Sergio Perez")
+- No puede existir dos Pilotos con el mismo nombre Abreviado (ej. "COL", "ALO", "PER")
+- Todos los atributos de Piloto son obligatorios
+
+#### Estructura de la clase Piloto a persistir:
+
+ ```json
+    {
+      "id": "cabbd417-1841-4b25-8798-e8d54df1416e",
+      "name": "Max",
+      "surname": "Verstappen",
+      "full_name": "Max Verstappen",
+      "short_name": "VER",
+      "picture_url": "https://www.formula1.com/..."
+    }
+```
 
 #### Funcionalidad
-- Crear Curso
-  - Endpoint: POST http://localhost:8080/cursos
-  - RequestBody:
-    ```json
-    {
-      "id": null,
-      "nombre": "Clean Architecture",
-      "fecha_cierre_inscripcion": "2023-03-01T10:00:00.000Z",
-      "nivel": "Inicial"
-    }
-    ```
-
-- Buscar Cursos
-  - Endpoint: GET http://localhost:8080/cursos
+- Cargar Pilotos
+  - Endpoint: POST http://localhost:8080/drivers
+  
+- Obtener Pilotos
+  - Endpoint: GET http://localhost:8080/drivers
 
 ## Etapas
 
-### Etapa 1
-Creación de casos de uso que cubran la funcionalidad, aplicando patrones y principios de diseño SOLID
+### Alumnos con parcial aprobado
+#### Etapa 1 - Deadline 23-11-24
+- Creación de casos de uso que cubran la funcionalidad, aplicando patrones y principios de diseño SOLID
+#### Etapa 2 - Hasta el momento de presentarse a Examen final
+- Creación de infraestructura para obtener pilotos de la api y persistir en base local, y endpoints para comunicarse con la aplicación
 
-**Deadline: 12/10/24**
+### Alumnos con parcial NO aprobado
+#### Etapa 1 - Deadline 23-11-24
+- Creación de casos de uso que cubran la funcionalidad, aplicando patrones y principios de diseño SOLID
+- Implementación de Controller/s (endpoints) con test que dejen establecido el entry-point de la aplicación
+#### Etapa 2 - Hasta el momento de presentarse a Examen final
+- Creación de infraestructura para obtener pilotos de la api y persistir en base local
 
-### Etapa 2
-Creación de infraestructura para persistir y endpoints para comunicarse con la aplicación
 
-**Deadline: 02/11/24**
-
-#### Buenas prácticas y conceptos a considerar
+### Buenas prácticas y conceptos a considerar
 - La nomenclatura de paquetes será en minúsculas
 - La nomenclatura de clases será en UpperCamelCase
 - La nomenclatura de métodos será en lowerCamelCase
 - La organización de paquetes será por modelo->aspecto, tanto a nivel src/main como a nivel src/test. Ejemplo:
   ```
-  cursos
+  drivers
   └─ excepciones
   └─ modelo
   └─ repositorio
