@@ -17,11 +17,11 @@ public class CrearPilotoGeatwayRepository implements Persistencia {
     }
     @Override
     public boolean existePilotoNombreCompleto(String nombre) {
-        return crearPilotoCRUD.existePilotoNombreCompleto(nombre);
+        return crearPilotoCRUD.existsBynombreCompleto(nombre);
     }
     @Override
     public boolean existePilotoNombreAbreviado(String abreviatura) {
-        return crearPilotoCRUD.existePilotoAbreviatura(abreviatura);
+        return crearPilotoCRUD.existsByNombreAbreviado(abreviatura);
     }
     @Override
     public boolean guardarPiloto(Piloto piloto) {
