@@ -11,15 +11,15 @@ public class PilotoDTO {
 
     @JsonProperty("id")
     private UUID id;
-    @JsonProperty
+    @JsonProperty("name")
     private String nombre;
-    @JsonProperty
+    @JsonProperty("surname")
     private String apellido;
-    @JsonProperty
+    @JsonProperty("full_name")
     private String nombreCompleto;
-    @JsonProperty
+    @JsonProperty("short_name")
     private String nombreAbreviado;
-    @JsonProperty
+    @JsonProperty("picture_url")
     private String fotoPiloto;
 
     public PilotoDTO(UUID id, String nombre, String apellido, String nombreCompleto, String nombreAbreviado, String fotoPiloto) {
