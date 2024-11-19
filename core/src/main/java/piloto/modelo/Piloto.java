@@ -42,7 +42,7 @@ public class Piloto {
     }
 
     public String getNombreCompleto() {
-        return nombre;
+        return nombreCompleto;
     }
 
     public String getNombreAbreviado() {

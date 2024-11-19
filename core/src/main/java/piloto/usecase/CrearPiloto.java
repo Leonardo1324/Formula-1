@@ -18,11 +18,11 @@ public class CrearPiloto implements piloto.input.CrearPiloto {
     public boolean crearPiloto(String nombrePiloto, String apellidoPiloto, String imagenPiloto) {
         Piloto miPiloto = Piloto.instance(UUID.randomUUID(),nombrePiloto,apellidoPiloto
                 ,nombrePiloto.concat(" "+apellidoPiloto),apellidoPiloto.substring(0,3).toUpperCase(),imagenPiloto);
-        if (myDB.existePilotoNombreCompleto(nombrePiloto.concat(" "+apellidoPiloto))) {
+        if (myDB.existePilotoNombreCompleto(miPiloto.getNombreCompleto())) {
             throw new ExceptionPilotoConElMismoNombre("Ya existe el piloto: " + miPiloto.getNombreCompleto());
         }
-        if (myDB.existePilotoNombreAbreviado(apellidoPiloto.substring(0,3).toUpperCase())) {
-            throw new ExceptionPilotoConElMismoNombreAbreviado("Ya existe el piloto: " + miPiloto.getNombreCompleto() + "abreviado como: "+miPiloto.getNombreAbreviado());
+        if (myDB.existePilotoNombreAbreviado(miPiloto.getNombreAbreviado())) {
+            throw new ExceptionPilotoConElMismoNombreAbreviado("Ya existe el piloto: " + miPiloto.getNombreCompleto() + " abreviado como: "+miPiloto.getNombreAbreviado());
         }
         return myDB.guardarPiloto(miPiloto);
     }

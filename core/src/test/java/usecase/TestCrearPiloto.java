@@ -62,7 +62,6 @@ public class TestCrearPiloto {
         Assertions.assertDoesNotThrow(() -> crearPiloto.crearPiloto("Franco", "Colapinto", dir));
     }
 
-
     @Test
     void CrearPilotoNoExisteNombreAbreviadoIncorrecto() { // crear correctamente
         String dir = "http://localhost";
@@ -72,7 +71,7 @@ public class TestCrearPiloto {
         when(BD.existePilotoNombreAbreviado("COL")).thenReturn(true);// existe esa abreviatura
         e = Assertions.assertThrows(ExceptionPilotoConElMismoNombreAbreviado.class,() -> crearPiloto.crearPiloto("Franco", "Colapinto", dir));
         verify(BD,never()).guardarPiloto(Mockito.any());
-        Assertions.assertEquals("Ya existe el piloto: Franco Colapinto",e.getMessage());
+        Assertions.assertEquals("Ya existe el piloto: Franco Colapinto abreviado como: COL",e.getMessage());
     }
 
 }
