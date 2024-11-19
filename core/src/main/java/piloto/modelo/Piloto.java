@@ -48,4 +48,20 @@ public class Piloto {
     public String getNombreAbreviado() {
         return nombreAbreviado;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getFotoPiloto() {
+        return fotoPiloto;
+    }
 }
