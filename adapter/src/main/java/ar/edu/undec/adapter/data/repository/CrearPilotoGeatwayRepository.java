@@ -15,7 +15,6 @@ public class CrearPilotoGeatwayRepository implements Persistencia {
     public CrearPilotoGeatwayRepository(CrearPilotoCRUD crearPilotoCRUD) {
         this.crearPilotoCRUD = crearPilotoCRUD;
     }
-
     @Override
     public boolean existePilotoNombreCompleto(String nombre) {
         return crearPilotoCRUD.existePilotoNombreCompleto(nombre);
