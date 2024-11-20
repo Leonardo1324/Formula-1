@@ -34,7 +34,7 @@ public class BuscarPilotoController {
                     .map(piloto -> new PilotoDTO(piloto.getId(), piloto.getNombre(),
                             piloto.getApellido(), piloto.getNombreCompleto(), piloto.getNombreAbreviado(),
                             piloto.getFotoPiloto()))
-                    .collect(Collectors.toList());  // Usamos Collectors.toList() para recolectar en una lista
+                    .collect(Collectors.toList());
 
             return ResponseEntity.ok(pilotoDTOs);
         } catch (Exception e) {
