@@ -2,10 +2,10 @@ package piloto.input;
 
 import piloto.modelo.Piloto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface BuscarPiloto {
-    ArrayList<Piloto> buscarPilotoPorNombre(String nombre);
-    ArrayList<Piloto> buscarPilotosPorApellido(String apellido);
-    ArrayList<Piloto> buscarPilotosPorAbreviatura(String abreviatura);
+    List<Piloto> buscarPilotoPorNombre(String nombre);
+    List<Piloto> buscarPilotosPorApellido(String apellido);
+    List<Piloto> buscarPilotosPorAbreviatura(String abreviatura);
 }

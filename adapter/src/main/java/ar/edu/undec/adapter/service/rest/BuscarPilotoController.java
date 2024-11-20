@@ -7,6 +7,8 @@ import piloto.modelo.Piloto;
 import piloto.usecase.BuscarPiloto;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pilotos")
@@ -18,19 +20,21 @@ public class BuscarPilotoController {
         this.input = buscarPiloto;
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<?> buscarPiloto(@PathVariable String name) {
+    @GetMapping("/{apellido}")
+    public ResponseEntity<?> buscarPiloto(@PathVariable String apellido) {
         try {
-            ArrayList<Piloto> pilotos = this.input.buscarPilotoPorNombre(name);
+            List<Piloto> pilotos = this.input.buscarPilotosPorApellido(apellido);
 
             if (pilotos.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
 
-            ArrayList<PilotoDTO> pilotoDTOs = (ArrayList<PilotoDTO>) pilotos.stream()
-                    .map(piloto -> new PilotoDTO(piloto.getId(),piloto.getNombre(),
-                            piloto.getApellido(),piloto.getNombreCompleto(),piloto.getNombreAbreviado(),
-                            piloto.getFotoPiloto()));
+
+            List<PilotoDTO> pilotoDTOs = pilotos.stream()
+                    .map(piloto -> new PilotoDTO(piloto.getId(), piloto.getNombre(),
+                            piloto.getApellido(), piloto.getNombreCompleto(), piloto.getNombreAbreviado(),
+                            piloto.getFotoPiloto()))
+                    .collect(Collectors.toList());  // Usamos Collectors.toList() para recolectar en una lista
 
             return ResponseEntity.ok(pilotoDTOs);
         } catch (Exception e) {

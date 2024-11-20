@@ -11,6 +11,7 @@ import piloto.output.PersistenciaBuscarPilotos;
 import piloto.usecase.BuscarPiloto;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.when;
@@ -25,9 +26,7 @@ public class TestBuscarPiloto {
     void BuscarPorNombre() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
 
-        ArrayList<Piloto> pilotosCorrectos = new ArrayList<Piloto>();
-
-        pilotosCorrectos.add(piloto);
+        List<Piloto> pilotosCorrectos = List.of(piloto);
 
         BuscarPiloto BP = new BuscarPiloto(BD);
         when(BP.buscarPilotoPorNombre("Franco")).thenReturn(pilotosCorrectos);
@@ -39,9 +38,7 @@ public class TestBuscarPiloto {
     void BuscarPorApellido() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
 
-        ArrayList<Piloto> pilotosCorrectos = new ArrayList<Piloto>();
-
-        pilotosCorrectos.add(piloto);
+        List<Piloto> pilotosCorrectos = List.of(piloto);
 
         BuscarPiloto BP = new BuscarPiloto(BD);
         when(BP.buscarPilotosPorApellido("Colapinto")).thenReturn(pilotosCorrectos);
@@ -53,9 +50,9 @@ public class TestBuscarPiloto {
     void BuscarPorAbreviatura() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
 
-        ArrayList<Piloto> pilotosCorrectos = new ArrayList<Piloto>();
+        List<Piloto> pilotosCorrectos = List.of(piloto);
 
-        pilotosCorrectos.add(piloto);
+//        pilotosCorrectos.add(piloto);
 
         BuscarPiloto BP = new BuscarPiloto(BD);
         when(BP.buscarPilotosPorAbreviatura("COL")).thenReturn(pilotosCorrectos);

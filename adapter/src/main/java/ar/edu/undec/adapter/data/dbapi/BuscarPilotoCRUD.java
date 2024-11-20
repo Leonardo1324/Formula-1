@@ -5,10 +5,12 @@ import org.springframework.data.repository.CrudRepository;
 import piloto.modelo.Piloto;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface BuscarPilotoCRUD extends CrudRepository<PilotoData, UUID> {
-    ArrayList<Piloto> findBynombreAbreviado(String nombreAbreviado);
-    ArrayList<Piloto> findBynombreCompleto(String nombreCompleto);
-    ArrayList<Piloto> findByApellido(String nombre);
+    List<PilotoData> findBynombreAbreviado(String nombreAbreviado);
+    List<PilotoData> findBynombreCompleto(String nombreCompleto);
+    List<PilotoData> findByapellido(String apellido);
 }

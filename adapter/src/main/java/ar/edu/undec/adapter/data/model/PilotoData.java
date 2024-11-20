@@ -14,15 +14,15 @@ public class PilotoData {
 
     @Id
     private UUID id;
-    @Column(name = "Nombre")
+    @Column(name = "nombre")
     private String nombre;
-    @Column(name = "Apellido")
+    @Column(name = "apellido")
     private String apellido;
-    @Column(name = "Nombre Completo")
+    @Column(name = "nombre completo")
     private String nombreCompleto;
-    @Column(name = "Abreviatura")
+    @Column(name = "abreviatura")
     private String nombreAbreviado;
-    @Column(name = "Foto Del Piloto")
+    @Column(name = "foto del piloto")
     private String fotoPiloto;
 
     public PilotoData() {}
@@ -46,7 +46,6 @@ public class PilotoData {
                 pilotoData.getNombreCompleto(),pilotoData.getNombreAbreviado(),
                 pilotoData.getFotoPiloto());
     }
-    // hacer el to domain
 
     public UUID getId() {return id;}
     public String getNombre() {return nombre;}
