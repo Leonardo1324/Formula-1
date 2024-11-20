@@ -42,6 +42,7 @@ public class PilotoDTO {
         return Piloto.instance(piloto.getId(), piloto.getNombre(),piloto.getApellido(),piloto.getNombreCompleto(),
                 piloto.getNombreAbreviado(),piloto.getFotoPiloto());
     }
+
     //hacer from domain
 
 }

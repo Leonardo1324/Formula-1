@@ -9,6 +9,7 @@ import piloto.output.Persistencia;
 @Repository
 public class CrearPilotoGeatwayRepository implements Persistencia {
 
+
     private CrearPilotoCRUD crearPilotoCRUD;
 
     @Autowired

@@ -41,6 +41,11 @@ public class PilotoData {
                 piloto.getNombreAbreviado(),piloto.getFotoPiloto());
     }
 
+    public static Piloto toDomain(PilotoData pilotoData){
+        return Piloto.instance(pilotoData.getId(),pilotoData.getNombre(),pilotoData.getApellido(),
+                pilotoData.getNombreCompleto(),pilotoData.getNombreAbreviado(),
+                pilotoData.getFotoPiloto());
+    }
     // hacer el to domain
 
     public UUID getId() {return id;}
