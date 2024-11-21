@@ -28,7 +28,9 @@ public class BuscarPilotosDesdeApi implements BuscarPilotosDesdeAPI {
 
             List<PilotoDTO> pilotosDTO = objectMapper.readValue(respuesta, new TypeReference<List<PilotoDTO>>() {});
 
-            return pilotosDTO.stream().map(PilotoDTO::toDomain).collect(Collectors.toList());
+            return pilotosDTO.stream().filter(pilotoDTO->pilotoDTO.getNombre()!=null && pilotoDTO.getApellido()!=null && pilotoDTO.getNombreCompleto() != null &&
+                            pilotoDTO.getNombreAbreviado()!=null && pilotoDTO.getFotoPiloto()!=null)
+                    .map(PilotoDTO::toDomain).collect(Collectors.toList());
 
         } catch (Exception e) {
             throw new RuntimeException(e);

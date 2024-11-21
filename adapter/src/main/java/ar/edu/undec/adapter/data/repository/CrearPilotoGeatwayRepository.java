@@ -26,6 +26,9 @@ public class CrearPilotoGeatwayRepository implements Persistencia {
     }
     @Override
     public boolean guardarPiloto(Piloto piloto) {
+        if (crearPilotoCRUD.existsBynombreCompleto(piloto.getNombreCompleto())) {
+            return false;
+        }
         crearPilotoCRUD.save(PilotoData.fromDomain(piloto));
         return true;
     }
