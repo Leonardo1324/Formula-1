@@ -9,17 +9,18 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PilotoDTO {
 
-    @JsonProperty("id")
-    private UUID id;
-    @JsonProperty("name")
+    // se cambiaron los codigos para que coincidan con los de la api
+    @JsonProperty("session_key")//id
+    private UUID id; // dejalo asi
+    @JsonProperty("first_name")//name
     private String nombre;
-    @JsonProperty("surname")
+    @JsonProperty("last_name")//surname
     private String apellido;
-    @JsonProperty("full_name")
+    @JsonProperty("full_name")//full_name
     private String nombreCompleto;
-    @JsonProperty("short_name")
+    @JsonProperty("name_acronym")//short_name
     private String nombreAbreviado;
-    @JsonProperty("picture_url")
+    @JsonProperty("headshot_url")//picture_url
     private String fotoPiloto;
 
     public PilotoDTO() {}
@@ -48,7 +49,10 @@ public class PilotoDTO {
     public void setFotoPiloto(String fotoPiloto) {this.fotoPiloto = fotoPiloto;}
 
     public static Piloto toDomain(PilotoDTO piloto) {
-        return Piloto.instance(piloto.getId(), piloto.getNombre(),piloto.getApellido(),piloto.getNombreCompleto(),
+        //cambio para generar un ID distinto
+//        return Piloto.instance(piloto.getId(), piloto.getNombre(),piloto.getApellido(),piloto.getNombreCompleto(),
+//                piloto.getNombreAbreviado(),piloto.getFotoPiloto());
+        return Piloto.instance(UUID.randomUUID(), piloto.getNombre(),piloto.getApellido(),piloto.getNombreCompleto(),
                 piloto.getNombreAbreviado(),piloto.getFotoPiloto());
     }
 
