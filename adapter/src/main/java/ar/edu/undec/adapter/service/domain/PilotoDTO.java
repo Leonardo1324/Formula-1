@@ -22,6 +22,8 @@ public class PilotoDTO {
     @JsonProperty("picture_url")
     private String fotoPiloto;
 
+    public PilotoDTO() {}
+
     public PilotoDTO(UUID id, String nombre, String apellido, String nombreCompleto, String nombreAbreviado, String fotoPiloto) {
         this.id = id;
         this.nombre = nombre;
@@ -37,6 +39,13 @@ public class PilotoDTO {
     public String getNombreCompleto() {return nombreCompleto;}
     public String getNombreAbreviado() {return nombreAbreviado;}
     public String getFotoPiloto() {return fotoPiloto;}
+
+    public void setId(UUID id) {this.id = id;}
+    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setApellido(String apellido) {this.apellido = apellido;}
+    public void setNombreCompleto(String nombreCompleto) {this.nombreCompleto = nombreCompleto;}
+    public void setNombreAbreviado(String nombreAbreviado) {this.nombreAbreviado = nombreAbreviado;}
+    public void setFotoPiloto(String fotoPiloto) {this.fotoPiloto = fotoPiloto;}
 
     public static Piloto toDomain(PilotoDTO piloto) {
         return Piloto.instance(piloto.getId(), piloto.getNombre(),piloto.getApellido(),piloto.getNombreCompleto(),
