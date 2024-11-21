@@ -2,6 +2,7 @@ package ar.edu.undec.adapter.service.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import piloto.modelo.Piloto;
 
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.UUID;
 public class PilotoDTO {
 
     // se cambiaron los codigos para que coincidan con los de la api
+    @JsonDeserialize(using = UUIDDeserializer.class)
     @JsonProperty("session_key")//id
     private UUID id; // dejalo asi
     @JsonProperty("first_name")//name
@@ -37,7 +39,7 @@ public class PilotoDTO {
     public UUID getId() {return id;}
     public String getNombre() {return nombre;}
     public String getApellido() {return apellido;}
-    public String getNombreCompleto() {return nombreCompleto;}
+    public String getNombreCompleto() {return nombre.concat(" "+ this.apellido);}
     public String getNombreAbreviado() {return nombreAbreviado;}
     public String getFotoPiloto() {return fotoPiloto;}
 

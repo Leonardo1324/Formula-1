@@ -35,8 +35,8 @@ public class Piloto {
         if (!nombre.concat(" "+apellido).equals(nombreCompleto)) {
             throw new ExceptionNombreCompletoIncorrecto("el nombre completo del piloto esta mal");
         }
-        if (!apellido.substring(0,3).toUpperCase().equals(nombreAbreviado)){
-            throw new ExceptionNombreAbreviadoIncorrecto("el nombre abreviado del piloto es incorrecto");
+        if (!apellido.replace(" ","").substring(0,3).toUpperCase().equals(nombreAbreviado)){
+            throw new ExceptionNombreAbreviadoIncorrecto("el nombre abreviado del piloto es incorrecto es: "+apellido.substring(0,3).toUpperCase());
         }
         return new Piloto(id,nombre,apellido,nombreCompleto,nombreAbreviado,fotoPiloto);
     }
