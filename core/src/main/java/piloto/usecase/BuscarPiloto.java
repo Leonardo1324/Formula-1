@@ -2,10 +2,9 @@ package piloto.usecase;
 
 import piloto.exception.ExceptionNoHayPilotos;
 import piloto.modelo.Piloto;
-import piloto.output.Persistencia;
 import piloto.output.PersistenciaBuscarPilotos;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BuscarPiloto implements piloto.input.BuscarPiloto {
     private PersistenciaBuscarPilotos myBD;
@@ -15,27 +14,27 @@ public class BuscarPiloto implements piloto.input.BuscarPiloto {
     }
 
     @Override
-    public ArrayList<Piloto> buscarPilotoPorNombre(String nombre) {
-        ArrayList<Piloto> pilotos = myBD.buscarPilotosPorNombre(nombre);
-        if (pilotos == null) {
+    public List<Piloto> buscarPilotoPorNombre(String nombre) {
+        List<Piloto> pilotos = myBD.buscarPilotosPorNombre(nombre);
+        if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con ese nombre");
         }
         return pilotos;
     }
 
     @Override
-    public ArrayList<Piloto> buscarPilotosPorApellido(String apellido) {
-        ArrayList<Piloto> pilotos = myBD.buscarPilotosPorApellido(apellido);
-        if (pilotos == null) {
+    public List<Piloto> buscarPilotosPorApellido(String apellido) {
+        List<Piloto> pilotos = myBD.buscarPilotosPorApellido(apellido);
+        if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con ese apellido");
         }
         return pilotos;
     }
 
     @Override
-    public ArrayList<Piloto> buscarPilotosPorAbreviatura(String abreviatura) {
-        ArrayList<Piloto> pilotos = myBD.buscarPilotosPorApellido(abreviatura);
-        if (pilotos == null) {
+    public List<Piloto> buscarPilotosPorAbreviatura(String abreviatura) {
+        List<Piloto> pilotos = myBD.buscarPilotosPorAbreviatura(abreviatura);
+        if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con esa abreviatura");
         }
         return pilotos;

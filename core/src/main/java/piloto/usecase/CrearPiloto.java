@@ -5,7 +5,6 @@ import piloto.exception.ExceptionPilotoConElMismoNombreAbreviado;
 import piloto.modelo.Piloto;
 import piloto.output.Persistencia;
 
-import java.net.URL;
 import java.util.UUID;
 
 public class CrearPiloto implements piloto.input.CrearPiloto {
