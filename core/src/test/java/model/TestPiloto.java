@@ -40,7 +40,7 @@ public class TestPiloto {
         String dir = "http://localhost";
         Exception e;
         e = Assertions.assertThrows(ExceptionNombreAbreviadoIncorrecto.class, () -> {Piloto.instance(UUID.randomUUID(),"Max","Verstappen","Max Verstappen","MAX", dir );});
-        Assertions.assertEquals("el nombre abreviado del piloto es incorrecto", e.getMessage());
+        Assertions.assertEquals("el nombre abreviado del piloto es incorrecto es: VER", e.getMessage());
     }
 }
 
