@@ -56,6 +56,7 @@ public class TestBuscarPiloto {
 
         BuscarPiloto BP = new BuscarPiloto(BD);
         when(BP.buscarPilotosPorAbreviatura("COL")).thenReturn(pilotosCorrectos);
+
         Assertions.assertDoesNotThrow(() -> BP.buscarPilotosPorAbreviatura("COL"));
         Assertions.assertEquals(pilotosCorrectos, BP.buscarPilotosPorAbreviatura("COL"));
     }

@@ -5,6 +5,7 @@ import ar.edu.undec.adapter.data.dbapi.BuscarPilotosDesdeApi;
 import ar.edu.undec.adapter.data.repository.CrearPilotoGeatwayRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,9 +39,15 @@ public class BuscarPilotosApiController {
     }
 
     @GetMapping("/api")
-    public List<Piloto> obtenerPilotos() throws Exception {
-        List<Piloto> pilotos;
-        pilotos = buscarPilotosDesdeApi.buscarPilotosDesdeAPI();
-        return pilotos;
+    public ResponseEntity<?> obtenerPilotos(){
+        try {
+            List<Piloto> pilotos = buscarPilotosDesdeApi.buscarPilotosDesdeAPI();
+            if (pilotos.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(pilotos);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
