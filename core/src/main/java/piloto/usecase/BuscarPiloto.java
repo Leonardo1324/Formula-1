@@ -16,7 +16,7 @@ public class BuscarPiloto implements piloto.input.BuscarPiloto {
     @Override
     public List<Piloto> buscarPilotoPorNombre(String nombre) {
         List<Piloto> pilotos = myBD.buscarPilotosPorNombre(nombre);
-        if (pilotos == null) {
+        if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con ese nombre");
         }
         return pilotos;
@@ -25,7 +25,7 @@ public class BuscarPiloto implements piloto.input.BuscarPiloto {
     @Override
     public List<Piloto> buscarPilotosPorApellido(String apellido) {
         List<Piloto> pilotos = myBD.buscarPilotosPorApellido(apellido);
-        if (pilotos == null) {
+        if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con ese apellido");
         }
         return pilotos;
@@ -34,7 +34,7 @@ public class BuscarPiloto implements piloto.input.BuscarPiloto {
     @Override
     public List<Piloto> buscarPilotosPorAbreviatura(String abreviatura) {
         List<Piloto> pilotos = myBD.buscarPilotosPorAbreviatura(abreviatura);
-        if (pilotos == null) {
+        if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con esa abreviatura");
         }
         return pilotos;
