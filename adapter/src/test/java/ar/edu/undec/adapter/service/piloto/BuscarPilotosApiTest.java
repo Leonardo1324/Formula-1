@@ -74,7 +74,7 @@ public class BuscarPilotosApiTest {
         verify(buscarPilotosDesdeApi,times(1)).buscarPilotosDesdeAPI();
     }
 
-    //Test de cargar pilotos (no deberia ir en esta parte viola el principio de responsabilidad unica por clase)
+    //Test de cargar pilotos (no deberia ir no cumple con responsabilidad unica por clase)
 
     @Test
     void cargaDePilotosDesdeLaApi() throws Exception {

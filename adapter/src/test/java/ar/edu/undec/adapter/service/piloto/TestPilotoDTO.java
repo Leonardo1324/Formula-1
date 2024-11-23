@@ -11,15 +11,14 @@ public class TestPilotoDTO {
 
     @Test
     void serializacionJsonEsCorrecta() throws Exception {
-        // Arrange
+
         UUID id = UUID.randomUUID();
         PilotoDTO pilotoDTO = new PilotoDTO(id, "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Act
         String json = objectMapper.writeValueAsString(pilotoDTO);
 
-        // Assert
+
         Assertions.assertTrue(json.contains("\"session_key\":\"" + id + "\""));
         Assertions.assertTrue(json.contains("\"first_name\":\"Franco\""));
         Assertions.assertTrue(json.contains("\"last_name\":\"Colapinto\""));
@@ -30,7 +29,7 @@ public class TestPilotoDTO {
 
     @Test
     void deserializacionJsonEsCorrecta() throws Exception {
-        // Arrange
+
         String json = """
                 {
                     "session_key": "123e4567-e89b-12d3-a456-426614174000",
@@ -43,10 +42,10 @@ public class TestPilotoDTO {
                 """;
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Act
+
         PilotoDTO pilotoDTO = objectMapper.readValue(json, PilotoDTO.class);
 
-        // Assert
+
         Assertions.assertNotNull(pilotoDTO);
 // el UUID es generado de forma random //Assertions.assertEquals(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"), pilotoDTO.getId());
         Assertions.assertNotNull(pilotoDTO.getId());

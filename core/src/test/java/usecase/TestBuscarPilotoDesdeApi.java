@@ -24,13 +24,10 @@ public class TestBuscarPilotoDesdeApi {
     @Test
     void PilotosCorrecto() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost/8080");
-
         List<Piloto> pilotosEsperados = List.of(piloto);
 
         when(buscarPilotosDesde.buscarPilotosDesdeAPI()).thenReturn(pilotosEsperados);
-
         BuscarPilotoDesdeApi buscarPilotoDesdeApi = new BuscarPilotoDesdeApi(buscarPilotosDesde);
-
         List<Piloto> resultado = buscarPilotoDesdeApi.buscarPilotos();
 
         Assertions.assertNotNull(resultado);
@@ -45,9 +42,7 @@ public class TestBuscarPilotoDesdeApi {
         List<Piloto> pilotosEsperados = List.of();
 
         when(buscarPilotosDesde.buscarPilotosDesdeAPI()).thenReturn(pilotosEsperados);
-
         BuscarPilotoDesdeApi buscarPilotoDesdeApi = new BuscarPilotoDesdeApi(buscarPilotosDesde);
-
         List<Piloto> resultado = buscarPilotoDesdeApi.buscarPilotos();
 
         Assertions.assertNotNull(resultado);

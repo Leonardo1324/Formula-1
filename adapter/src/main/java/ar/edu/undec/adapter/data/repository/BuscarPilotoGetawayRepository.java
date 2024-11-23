@@ -21,7 +21,7 @@ public class BuscarPilotoGetawayRepository implements PersistenciaBuscarPilotos 
     }
 
     @Override
-    public List<Piloto> buscarPilotosPorNombre(String nombre) {
+    public List<Piloto> buscarPilotosPorNombreCompleto(String nombre) {
         List<Piloto> pilotos;
         pilotos = buscarPilotoCRUD.findBynombreCompleto(nombre).stream()
                 .map(PilotoData::toDomain).collect(Collectors.toList());

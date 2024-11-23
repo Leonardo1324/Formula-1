@@ -26,41 +26,36 @@ public class TestBuscarPiloto {
     @Test
     void BuscarPorNombre() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
-
         List<Piloto> pilotosCorrectos = List.of(piloto);
 
-        when(BD.buscarPilotosPorNombre("Franco")).thenReturn(pilotosCorrectos);
+        when(BD.buscarPilotosPorNombreCompleto("Franco Colapinto")).thenReturn(pilotosCorrectos);
 
         BuscarPiloto BP = new BuscarPiloto(BD);
 
-        Assertions.assertDoesNotThrow(() -> BP.buscarPilotoPorNombre("Franco"));
-        Assertions.assertEquals(pilotosCorrectos, BP.buscarPilotoPorNombre("Franco"));
+        Assertions.assertDoesNotThrow(() -> BP.buscarPilotoPorNombreCompleto("Franco Colapinto"));
+        Assertions.assertEquals(pilotosCorrectos, BP.buscarPilotoPorNombreCompleto("Franco Colapinto"));
     }
 
     @Test
     void BuscarPorNombreNoEncontrado() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
-
         List<Piloto> pilotosCorrectos = List.of(piloto);
 
         Exception e;
 
-        when(BD.buscarPilotosPorNombre("Max")).thenReturn(List.of());
-
+        when(BD.buscarPilotosPorNombreCompleto("Max Verstappen")).thenReturn(List.of());
         BuscarPiloto BP = new BuscarPiloto(BD);
 
-        e = Assertions.assertThrows(ExceptionNoHayPilotos.class,() -> BP.buscarPilotoPorNombre("Max"));
+        e = Assertions.assertThrows(ExceptionNoHayPilotos.class,() -> BP.buscarPilotoPorNombreCompleto("Max Verstapen"));
         Assertions.assertEquals("No encontraron pilotos con ese nombre", e.getMessage());
     }
 
     @Test
     void BuscarPorApellido() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
-
         List<Piloto> pilotosCorrectos = List.of(piloto);
 
         when(BD.buscarPilotosPorApellido("Colapinto")).thenReturn(pilotosCorrectos);
-
         BuscarPiloto BP = new BuscarPiloto(BD);
 
         Assertions.assertDoesNotThrow(() -> BP.buscarPilotosPorApellido("Colapinto"));
@@ -69,12 +64,10 @@ public class TestBuscarPiloto {
 
     @Test
     void BuscarPorApellidoNoEncontrado() {
-        Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
-
+        Piloto piloto = Piloto.instance(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost");
         List<Piloto> pilotosCorrectos = List.of(piloto);
 
         Exception e;
-
         when(BD.buscarPilotosPorApellido("Verstappen")).thenReturn(List.of());
 
         BuscarPiloto BP = new BuscarPiloto(BD);
@@ -86,11 +79,9 @@ public class TestBuscarPiloto {
     @Test
     void BuscarPorAbreviatura() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
-
         List<Piloto> pilotosCorrectos = List.of(piloto);
 
         when(BD.buscarPilotosPorAbreviatura("COL")).thenReturn(pilotosCorrectos);
-
         BuscarPiloto BP = new BuscarPiloto(BD);
 
         Assertions.assertDoesNotThrow(() -> BP.buscarPilotosPorAbreviatura("COL"));
@@ -100,13 +91,11 @@ public class TestBuscarPiloto {
     @Test
     void BuscarPorAbreviaturaNoEncontrado() {
         Piloto piloto = Piloto.instance(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost");
-
         List<Piloto> pilotosCorrectos = List.of(piloto);
 
         Exception e;
 
         when(BD.buscarPilotosPorAbreviatura("VER")).thenReturn(List.of());
-
         BuscarPiloto BP = new BuscarPiloto(BD);
 
         e = Assertions.assertThrows(ExceptionNoHayPilotos.class,() -> BP.buscarPilotosPorAbreviatura("VER"));

@@ -14,8 +14,8 @@ public class BuscarPiloto implements piloto.input.BuscarPiloto {
     }
 
     @Override
-    public List<Piloto> buscarPilotoPorNombre(String nombre) {
-        List<Piloto> pilotos = myBD.buscarPilotosPorNombre(nombre);
+    public List<Piloto> buscarPilotoPorNombreCompleto(String nombre) {
+        List<Piloto> pilotos = myBD.buscarPilotosPorNombreCompleto(nombre);
         if (pilotos.isEmpty()) {
             throw new ExceptionNoHayPilotos("No encontraron pilotos con ese nombre");
         }

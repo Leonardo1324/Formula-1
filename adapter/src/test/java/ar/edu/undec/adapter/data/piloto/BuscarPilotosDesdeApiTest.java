@@ -33,7 +33,6 @@ public class BuscarPilotosDesdeApiTest {
 
     @Test
     void buscarPilotosDesdeAPIDevuelveListaDePilotos() throws Exception {
-        // Arrange
         String respuestaJson = """
                 [
                         {
@@ -57,21 +56,19 @@ public class BuscarPilotosDesdeApiTest {
         when(restTemplate.getForObject(url, String.class)).thenReturn(respuestaJson);
         when(objectMapper.readValue(any(String.class), any(TypeReference.class)))
                 .thenReturn(pilotosDTO);
-        // Act
+
+
         List<Piloto> pilotos = buscarPilotosDesdeApi.buscarPilotosDesdeAPI();
 
-        // Assert
         Assertions.assertNotNull(pilotos);
         Assertions.assertEquals(1, pilotos.size());
         Assertions.assertEquals("Max", pilotos.getFirst().getNombre());
         Assertions.assertEquals("Verstappen", pilotos.getFirst().getApellido());
-
     }
 
     @Test
     void buscarPilotosDesdeAPI_LanzaExcepcion() {
 
-        // Configuración: Mock de la respuesta no válida y del error en ObjectMapper
         String respuestaInvalida = "respuesta no válida";
         when(restTemplate.getForObject("https://api.openf1.org/v1/drivers", String.class))
                 .thenReturn(respuestaInvalida);
@@ -83,12 +80,10 @@ public class BuscarPilotosDesdeApiTest {
             throw new RuntimeException(e);
         }
 
-        // Ejecución y verificación
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             buscarPilotosDesdeApi.buscarPilotosDesdeAPI();
         });
 
-        // Validar el mensaje de la excepción
         Assertions.assertNotNull(exception);
         Assertions.assertTrue(exception.getMessage().contains("Error al procesar JSON"));
         Assertions.assertTrue(exception.getCause() instanceof JsonProcessingException);

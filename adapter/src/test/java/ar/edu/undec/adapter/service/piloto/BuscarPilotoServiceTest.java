@@ -30,13 +30,9 @@ public class BuscarPilotoServiceTest {
 
     @Test
     void BuscarPilotoCorrectoReturnOk() {
-        // Arrange
 
-//        BuscarPiloto input = mock(piloto.usecase.BuscarPiloto.class);
-//        BuscarPilotoController controller = new BuscarPilotoController(input);
-
-        String apellido = "Perez";
-        Piloto piloto1 = Piloto.instance(UUID.randomUUID(), "Juan", "Perez", "Juan Perez", "PER", "foto1.jpg");
+        String apellido = "Colapinto";
+        Piloto piloto1 = Piloto.instance(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
         List<Piloto> pilotos = List.of(piloto1);
 
         when(input.buscarPilotosPorApellido(apellido)).thenReturn(pilotos);

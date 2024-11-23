@@ -28,93 +28,86 @@ public class BuscarPilotoDataTest {
     private BuscarPilotoGetawayRepository buscarPilotoGetawayRepository;
 
     @Test
-    void buscarPilotosPorNombre_DevuelveListaDePilotos() {
-        // Configuración
+    void buscarPilotosPorNombreCompletoDevuelveListaDePilotos() {
         String nombre = "Max Verstappen";
-        PilotoData pilotoData = new PilotoData(
-                UUID.randomUUID(),
-                "Max",
-                "Verstappen",
-                "Max Verstappen",
-                "VER",
-                "https://example.com/max.jpg"
-        );
+        PilotoData pilotoData = new PilotoData(UUID.randomUUID(), "Max", "Verstappen", "Max Verstappen", "VER", "LocalHost/8080");
 
         when(buscarPilotoCRUD.findBynombreCompleto(nombre)).thenReturn(List.of(pilotoData));
 
-        // Ejecución
-        List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorNombre(nombre);
+        List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorNombreCompleto(nombre);
 
-        // Verificación
         Assertions.assertNotNull(resultado);
         Assertions.assertEquals(1, resultado.size());
-        Assertions.assertEquals("Max", resultado.get(0).getNombre());
-        Assertions.assertEquals("Verstappen", resultado.get(0).getApellido());
+        Assertions.assertEquals("Max", resultado.getFirst().getNombre());
+        Assertions.assertEquals("Verstappen", resultado.getFirst().getApellido());
         Mockito.verify(buscarPilotoCRUD, times(1)).findBynombreCompleto(nombre);
     }
 
     @Test
-    void buscarPilotosPorApellido_DevuelveListaDePilotos() {
-        // Configuración
-        String apellido = "Hamilton";
-        PilotoData pilotoData1 = new PilotoData(
-                UUID.randomUUID(),
-                "Lewis",
-                "Hamilton",
-                "Lewis Hamilton",
-                "HAM",
-                "https://example.com/lewis.jpg"
-        );
+    void buscarPilotosPorApellidoDevuelveListaDePilotos() {
+        String apellido = "Verstappen";
+        PilotoData pilotoData1 = new PilotoData(UUID.randomUUID(), "Max", "Verstappen", "Max Verstappen", "VER", "LocalHost/8080");
 
         when(buscarPilotoCRUD.findByapellido(apellido)).thenReturn(List.of(pilotoData1));
 
-        // Ejecución
         List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorApellido(apellido);
 
-        // Verificación
         Assertions.assertNotNull(resultado);
         Assertions.assertEquals(1, resultado.size());
-        Assertions.assertEquals("Hamilton", resultado.get(0).getApellido());
+        Assertions.assertEquals("Verstappen", resultado.getFirst().getApellido());
         Mockito.verify(buscarPilotoCRUD, times(1)).findByapellido(apellido);
     }
 
     @Test
-    void buscarPilotosPorAbreviatura_DevuelveListaDePilotos() {
-        // Configuración
-        String abreviatura = "ALO";
-        PilotoData pilotoData = new PilotoData(
-                UUID.randomUUID(),
-                "Fernando",
-                "Alonso",
-                "Fernando Alonso",
-                "ALO",
-                "https://example.com/fernando.jpg"
-        );
+    void buscarPilotosPorAbreviaturaDevuelveListaDePilotos() {
+
+        String abreviatura = "VER";
+        PilotoData pilotoData = new PilotoData(UUID.randomUUID(), "Max", "Verstappen", "Max Verstappen", "VER", "LocalHost/8080");
 
         when(buscarPilotoCRUD.findBynombreAbreviado(abreviatura)).thenReturn(List.of(pilotoData));
 
-        // Ejecución
         List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorAbreviatura(abreviatura);
 
-        // Verificación
         Assertions.assertNotNull(resultado);
         Assertions.assertEquals(1, resultado.size());
-        Assertions.assertEquals("ALO", resultado.get(0).getNombreAbreviado());
+        Assertions.assertEquals("VER", resultado.getFirst().getNombreAbreviado());
         Mockito.verify(buscarPilotoCRUD, times(1)).findBynombreAbreviado(abreviatura);
     }
 
     @Test
-    void buscarPilotosPorNombre_DevuelveListaVacia() {
-        // Configuración
+    void buscarPilotosPorNombreCompletoDevuelveListaVacia() {
         String nombre = "Sebastian Vettel";
         when(buscarPilotoCRUD.findBynombreCompleto(nombre)).thenReturn(List.of());
 
-        // Ejecución
-        List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorNombre(nombre);
+        List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorNombreCompleto(nombre);
 
-        // Verificación
         Assertions.assertNotNull(resultado);
         Assertions.assertTrue(resultado.isEmpty());
         Mockito.verify(buscarPilotoCRUD, times(1)).findBynombreCompleto(nombre);
+    }
+
+
+    @Test
+    void buscarPilotosPorAbreviaturaDevuelveListaVacia() {
+        String abreviatura = "VET";
+        when(buscarPilotoCRUD.findBynombreAbreviado(abreviatura)).thenReturn(List.of());
+
+        List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorAbreviatura(abreviatura);
+
+        Assertions.assertNotNull(resultado);
+        Assertions.assertTrue(resultado.isEmpty());
+        Mockito.verify(buscarPilotoCRUD, times(1)).findBynombreAbreviado(abreviatura);
+    }
+
+    @Test
+    void buscarPilotosPorApellidoDevuelveListaVacia() {
+        String apellido = "Vettel";
+        when(buscarPilotoCRUD.findByapellido(apellido)).thenReturn(List.of());
+
+        List<Piloto> resultado = buscarPilotoGetawayRepository.buscarPilotosPorApellido(apellido);
+
+        Assertions.assertNotNull(resultado);
+        Assertions.assertTrue(resultado.isEmpty());
+        Mockito.verify(buscarPilotoCRUD, times(1)).findByapellido(apellido);
     }
 }
