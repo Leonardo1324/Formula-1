@@ -8,4 +8,5 @@ public interface BuscarPiloto {
     List<Piloto> buscarPilotoPorNombreCompleto(String nombre);
     List<Piloto> buscarPilotosPorApellido(String apellido);
     List<Piloto> buscarPilotosPorAbreviatura(String abreviatura);
+    List<Piloto> buscarTodasLosPilotos();
 }

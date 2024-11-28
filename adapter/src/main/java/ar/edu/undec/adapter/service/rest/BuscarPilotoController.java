@@ -20,15 +20,14 @@ public class BuscarPilotoController {
         this.input = buscarPiloto;
     }
 
-    @GetMapping("/{apellido}")
-    public ResponseEntity<?> buscarPiloto(@PathVariable String apellido) {
+    @GetMapping()
+    public ResponseEntity<?> buscarPiloto() {
         try {
-            List<Piloto> pilotos = this.input.buscarPilotosPorApellido(apellido);
+            List<Piloto> pilotos = this.input.buscarTodasLosPilotos();
 
             if (pilotos.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
-
 
             List<PilotoDTO> pilotoDTOs = pilotos.stream()
                     .map(piloto -> new PilotoDTO(piloto.getId(), piloto.getNombre(),

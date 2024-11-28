@@ -8,4 +8,5 @@ public interface PersistenciaBuscarPilotos {
     List<Piloto> buscarPilotosPorNombreCompleto(String nombre);
     List<Piloto> buscarPilotosPorApellido(String apellido);
     List<Piloto> buscarPilotosPorAbreviatura(String abreviatura);
+    List<Piloto> buscarTodosLosPilotos();
 }

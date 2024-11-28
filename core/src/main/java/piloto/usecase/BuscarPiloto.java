@@ -39,4 +39,10 @@ public class BuscarPiloto implements piloto.input.BuscarPiloto {
         }
         return pilotos;
     }
+
+    @Override
+    public List<Piloto> buscarTodasLosPilotos() {
+        List<Piloto> pilotos;
+        return pilotos = myBD.buscarTodosLosPilotos();
+    }
 }
