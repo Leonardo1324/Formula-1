@@ -30,16 +30,49 @@ public class BuscarPilotoController {
                 return ResponseEntity.notFound().build();
             }
 
-            List<PilotoDTO> pilotoDTOs = pilotos.stream()
-                    .map(piloto -> new PilotoDTO(piloto.getId(), piloto.getNombre(),
-                            piloto.getApellido(), piloto.getNombreCompleto(), piloto.getNombreAbreviado(),
-                            piloto.getFotoPiloto()))
-                    .collect(Collectors.toList());
-
-            return ResponseEntity.ok(pilotoDTOs);
+            return ResponseEntity.ok(convertirAPilotoDTO(pilotos));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+
+    @GetMapping("/apellido")
+    public ResponseEntity<?> buscarPilotoPorApellido(@RequestParam String apellido) {
+        try {
+            List<Piloto> pilotos = this.input.buscarPilotosPorApellido(apellido);
+
+            if (pilotos.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok(convertirAPilotoDTO(pilotos));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/abreviatura")
+    public ResponseEntity<?> buscarPilotoPorAbreviatura(@RequestParam String abreviatura) {
+        try {
+            List<Piloto> pilotos = this.input.buscarPilotosPorAbreviatura(abreviatura);
+
+            if (pilotos.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok(convertirAPilotoDTO(pilotos));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    private List<PilotoDTO> convertirAPilotoDTO(List<Piloto> pilotos) {
+        return pilotos.stream()
+                .map(piloto -> new PilotoDTO(piloto.getId(), piloto.getNombre(),
+                        piloto.getApellido(), piloto.getNombreCompleto(),
+                        piloto.getNombreAbreviado(), piloto.getFotoPiloto()))
+                .collect(Collectors.toList());
     }
 
 }

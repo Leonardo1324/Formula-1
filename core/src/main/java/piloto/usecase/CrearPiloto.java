@@ -22,7 +22,7 @@ public class CrearPiloto implements piloto.input.CrearPiloto {
             throw new ExceptionPilotoConElMismoNombre("Ya existe el piloto: " + miPiloto.getNombreCompleto());
         }
         if (myDB.existePilotoNombreAbreviado(miPiloto.getNombreAbreviado())) {
-            throw new ExceptionPilotoConElMismoNombreAbreviado("Ya existe el piloto: " + miPiloto.getNombreCompleto() + " abreviado como: "+miPiloto.getNombreAbreviado());
+            throw new ExceptionPilotoConElMismoNombreAbreviado("Ya existe el piloto: " + miPiloto.getApellido() + " abreviado como: "+miPiloto.getNombreAbreviado());
         }
         return myDB.guardarPiloto(miPiloto);
     }
