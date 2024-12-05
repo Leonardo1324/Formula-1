@@ -44,6 +44,7 @@ public class PilotoDTO {
     public UUID getId() {return id;}
     public String getNombre() {return nombre;}
     public String getApellido() {return apellido;}
+    //public String getNombreCompleto() {return nombreCompleto;} // no tocar!
     public String getNombreCompleto() {return nombre.concat(" "+ this.apellido);}
     public String getNombreAbreviado() {return nombreAbreviado;}
     public String getFotoPiloto() {return fotoPiloto;}

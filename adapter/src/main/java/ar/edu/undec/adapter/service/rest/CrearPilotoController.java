@@ -35,6 +35,7 @@ public class CrearPilotoController {
                         pilotoDTO.getNombre(),
                         pilotoDTO.getApellido(),
                         pilotoDTO.getNombreAbreviado(),
+                        pilotoDTO.getNombreCompleto(),
                         pilotoDTO.getFotoPiloto()
                 );
                 if (!result) {

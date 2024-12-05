@@ -28,7 +28,7 @@ public class CrearPilotoServiceTest {
 
     @Test
     void crearPilotosCorrectamenteRetorna200() {
-        when(input.crearPiloto("Franco", "Colapinto", "COL","LocalHost/8080")).thenReturn(true);
+        when(input.crearPiloto("Franco", "Colapinto", "COL","Franco Colapinto","LocalHost/8080")).thenReturn(true);
 
         PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
 
@@ -40,7 +40,7 @@ public class CrearPilotoServiceTest {
 
     @Test
     void crearPilotoConErroresParcialesRetorna200ConErrores() {
-        when(input.crearPiloto("Franco", "Colapinto", "COL","LocalHost/8080")).thenReturn(false);
+        when(input.crearPiloto("Franco", "Colapinto", "COL","Franco Colapinto","LocalHost/8080")).thenReturn(false);
 
         PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
 
@@ -52,7 +52,7 @@ public class CrearPilotoServiceTest {
 
     @Test
     void crearPilotoLanzaExcepcionGlobalRetorna400() {
-        when(input.crearPiloto("Franco", "Colapinto", "COL","LocalHost/8080")).thenThrow(new RuntimeException("Error inesperado"));
+        when(input.crearPiloto("Franco", "Colapinto", "COL","Franco Colapinto","LocalHost/8080")).thenThrow(new RuntimeException("Error inesperado"));
 
         PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
 
