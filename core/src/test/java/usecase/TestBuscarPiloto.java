@@ -46,7 +46,7 @@ public class TestBuscarPiloto {
         when(BD.buscarPilotosPorNombreCompleto("Max Verstappen")).thenReturn(List.of());
         BuscarPiloto BP = new BuscarPiloto(BD);
 
-        e = Assertions.assertThrows(ExceptionNoHayPilotos.class,() -> BP.buscarPilotoPorNombreCompleto("Max Verstapen"));
+        e = Assertions.assertThrows(ExceptionNoHayPilotos.class,() -> BP.buscarPilotoPorNombreCompleto("Max Verstappen"));
         Assertions.assertEquals("No encontraron pilotos con ese nombre", e.getMessage());
     }
 

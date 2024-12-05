@@ -1,6 +1,5 @@
 package ar.edu.undec.adapter.service.piloto;
 
-
 import ar.edu.undec.adapter.service.domain.PilotoDTO;
 import ar.edu.undec.adapter.service.rest.CrearPilotoController;
 import org.junit.jupiter.api.Assertions;
@@ -9,14 +8,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import piloto.exception.ExceptionPilotoConElMismoNombre;
 import piloto.input.CrearPiloto;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CrearPilotoServiceTest {
@@ -28,39 +27,38 @@ public class CrearPilotoServiceTest {
     CrearPilotoController controller;
 
     @Test
-    void crearPilotoCorrectamenteReturn200() {
+    void crearPilotosCorrectamenteRetorna200() {
+        when(input.crearPiloto("Franco", "Colapinto", "LocalHost/8080")).thenReturn(true);
 
-    when(input.crearPiloto("Franco","Colapinto","LocalHost/8080")).thenReturn(true);
+        PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
 
-        PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost/8080");
+        ResponseEntity<?> resultado = controller.crearPiloto(List.of(pilotoDTO));
 
-        ResponseEntity resultado = controller.crearPiloto(pilotoDTO);
-
-        Assertions.assertEquals(HttpStatus.OK, resultado.getStatusCode());
+        Assertions.assertEquals(200, resultado.getStatusCode().value());
+        Assertions.assertEquals("Todos los pilotos fueron creados exitosamente.", resultado.getBody());
     }
 
     @Test
-    void crearPilotoIncorrectamenteReturn500() {
+    void crearPilotoConErroresParcialesRetorna200ConErrores() {
+        when(input.crearPiloto("Franco", "Colapinto", "LocalHost/8080")).thenReturn(false);
 
-        when(input.crearPiloto("Franco","Colapinto","LocalHost/8080")).thenReturn(false);
+        PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
 
-        PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost/8080");
+        ResponseEntity<?> resultado = controller.crearPiloto(List.of(pilotoDTO));
 
-        ResponseEntity resultado = controller.crearPiloto(pilotoDTO);
-
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, resultado.getStatusCode());
+        Assertions.assertEquals(200, resultado.getStatusCode().value());
+        Assertions.assertTrue(resultado.getBody().toString().contains("Algunos pilotos no fueron creados por"));
     }
 
     @Test
-    void crearPilotoYaExistenteReturn400() {
+    void crearPilotoLanzaExcepcionGlobalRetorna400() {
+        when(input.crearPiloto("Franco", "Colapinto", "LocalHost/8080")).thenThrow(new RuntimeException("Error inesperado"));
 
-        when(input.crearPiloto("Franco","Colapinto","LocalHost/8080")).thenThrow(new ExceptionPilotoConElMismoNombre("Ya existe el piloto: Franco Colapinto"));
+        PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(), "Franco", "Colapinto", "Franco Colapinto", "COL", "LocalHost/8080");
 
-        PilotoDTO pilotoDTO = new PilotoDTO(UUID.randomUUID(),"Franco","Colapinto","Franco Colapinto","COL","LocalHost/8080");
+        ResponseEntity<?> resultado = controller.crearPiloto(List.of(pilotoDTO));
 
-        ResponseEntity resultado = controller.crearPiloto(pilotoDTO);
-
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, resultado.getStatusCode());
-        Assertions.assertEquals("Ya existe el piloto: Franco Colapinto", resultado.getBody());
+        Assertions.assertEquals(400, resultado.getStatusCode().value());
+        Assertions.assertEquals("Error inesperado", resultado.getBody());
     }
 }

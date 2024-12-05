@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import piloto.input.CrearPiloto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/pilotos")
 public class CrearPilotoController {
@@ -22,17 +25,31 @@ public class CrearPilotoController {
 
     @PostMapping
     //@RequestBody
-    public ResponseEntity<?> crearPiloto(@RequestBody PilotoDTO pilotoDTO){
-        try {
-            boolean result = this.input.crearPiloto(pilotoDTO.getNombre(),pilotoDTO.getApellido(),pilotoDTO.getFotoPiloto());
-            if(result) {
-                return ResponseEntity.ok().build();
+    public ResponseEntity<?> crearPiloto(@RequestBody List<PilotoDTO> pilotosDTO) {
+        List<String> errores = new ArrayList<>();
+
+        for (PilotoDTO pilotoDTO : pilotosDTO) {
+            try {
+                boolean result = this.input.crearPiloto(
+                        pilotoDTO.getNombre(),
+                        pilotoDTO.getApellido(),
+                        pilotoDTO.getFotoPiloto()
+                );
+
+                if (!result) {
+                    errores.add("No se pudo crear el piloto: " + pilotoDTO.getNombreCompleto());
+                }
+            } catch (RuntimeException e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
-            else {
-                return ResponseEntity.internalServerError().build();
+            catch (Exception e) {
+                errores.add("Error con el piloto " + pilotoDTO.getNombreCompleto() + ": " + e.getMessage());
             }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        if (errores.isEmpty()) {
+            return ResponseEntity.ok("Todos los pilotos fueron creados exitosamente.");
+        } else {
+            return ResponseEntity.ok("Algunos pilotos no fueron creados por:  " + String.join("; ", errores));
         }
     }
 }

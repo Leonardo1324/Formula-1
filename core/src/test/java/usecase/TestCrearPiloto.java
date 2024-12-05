@@ -79,7 +79,7 @@ public class TestCrearPiloto {
         e = Assertions.assertThrows(ExceptionPilotoConElMismoNombreAbreviado.class,() -> crearPiloto.crearPiloto("Franco", "Colapinto", dir));
 
         verify(BD,never()).guardarPiloto(Mockito.any());
-        Assertions.assertEquals("Ya existe el piloto: Franco Colapinto abreviado como: COL",e.getMessage());
+        Assertions.assertEquals("Ya existe el piloto: Colapinto abreviado como: COL",e.getMessage());
     }
 
 }
