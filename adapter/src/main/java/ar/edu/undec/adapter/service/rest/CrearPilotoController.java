@@ -27,6 +27,7 @@ public class CrearPilotoController {
     //@RequestBody
     public ResponseEntity<?> crearPiloto(@RequestBody List<PilotoDTO> pilotosDTO) {
         List<String> errores = new ArrayList<>();
+        boolean hayErroresCriticos = false;
 
         for (PilotoDTO pilotoDTO : pilotosDTO) {
             try {
@@ -35,12 +36,12 @@ public class CrearPilotoController {
                         pilotoDTO.getApellido(),
                         pilotoDTO.getFotoPiloto()
                 );
-
                 if (!result) {
                     errores.add("No se pudo crear el piloto: " + pilotoDTO.getNombreCompleto());
                 }
             } catch (RuntimeException e) {
-                return ResponseEntity.badRequest().body(e.getMessage());
+                hayErroresCriticos = true;
+                errores.add("Error crítico con el piloto " + pilotoDTO.getNombreCompleto() + ": " + e.getMessage());
             }
             catch (Exception e) {
                 errores.add("Error con el piloto " + pilotoDTO.getNombreCompleto() + ": " + e.getMessage());
@@ -49,7 +50,12 @@ public class CrearPilotoController {
         if (errores.isEmpty()) {
             return ResponseEntity.ok("Todos los pilotos fueron creados exitosamente.");
         } else {
-            return ResponseEntity.ok("Algunos pilotos no fueron creados por:  " + String.join("; ", errores));
+            if (hayErroresCriticos){
+                return ResponseEntity.badRequest().body("Errores críticos detectados: " + String.join("; ", errores));
+            }
+            else{
+                return ResponseEntity.ok("Algunos pilotos no fueron creados por:  " + String.join("; ", errores));
+            }
         }
     }
 }

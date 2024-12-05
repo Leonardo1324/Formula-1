@@ -59,6 +59,6 @@ public class CrearPilotoServiceTest {
         ResponseEntity<?> resultado = controller.crearPiloto(List.of(pilotoDTO));
 
         Assertions.assertEquals(400, resultado.getStatusCode().value());
-        Assertions.assertEquals("Error inesperado", resultado.getBody());
+        Assertions.assertEquals("Errores críticos detectados: Error crítico con el piloto Franco Colapinto: Error inesperado", resultado.getBody());
     }
 }

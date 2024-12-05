@@ -16,8 +16,10 @@ public class CrearPiloto implements piloto.input.CrearPiloto {
     }
     @Override
     public boolean crearPiloto(String nombrePiloto, String apellidoPiloto, String imagenPiloto) {
+
         Piloto miPiloto = Piloto.instance(UUID.randomUUID(),nombrePiloto,apellidoPiloto
                 ,nombrePiloto.concat(" "+apellidoPiloto),apellidoPiloto.substring(0,3).toUpperCase(),imagenPiloto);
+
         if (myDB.existePilotoNombreCompleto(miPiloto.getNombreCompleto())) {
             throw new ExceptionPilotoConElMismoNombre("Ya existe el piloto: " + miPiloto.getNombreCompleto());
         }
