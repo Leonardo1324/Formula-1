@@ -1,5 +1,6 @@
 package ar.edu.undec.adapter.service.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -15,14 +16,18 @@ public class PilotoDTO {
     @JsonProperty("session_key")//id
     private UUID id; // dejalo asi
     @JsonProperty("first_name")//name
+    @JsonAlias("name")
     private String nombre;
     @JsonProperty("last_name")//surname
+    @JsonAlias("surname")
     private String apellido;
     @JsonProperty("full_name")//full_name
     private String nombreCompleto;
     @JsonProperty("name_acronym")//short_name
+    @JsonAlias("short_name")
     private String nombreAbreviado;
     @JsonProperty("headshot_url")//picture_url
+    @JsonAlias("picture_url")
     private String fotoPiloto;
 
     public PilotoDTO() {}

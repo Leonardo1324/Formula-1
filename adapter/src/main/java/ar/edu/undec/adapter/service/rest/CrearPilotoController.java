@@ -34,6 +34,7 @@ public class CrearPilotoController {
                 boolean result = this.input.crearPiloto(
                         pilotoDTO.getNombre(),
                         pilotoDTO.getApellido(),
+                        pilotoDTO.getNombreAbreviado(),
                         pilotoDTO.getFotoPiloto()
                 );
                 if (!result) {
@@ -41,7 +42,7 @@ public class CrearPilotoController {
                 }
             } catch (RuntimeException e) {
                 hayErroresCriticos = true;
-                errores.add("Error crítico con el piloto " + pilotoDTO.getNombreCompleto() + ": " + e.getMessage());
+                errores.add("Error crítico con un piloto " + pilotoDTO.getNombreCompleto() + ": " + e.getMessage());
             }
             catch (Exception e) {
                 errores.add("Error con el piloto " + pilotoDTO.getNombreCompleto() + ": " + e.getMessage());
@@ -50,7 +51,7 @@ public class CrearPilotoController {
         if (errores.isEmpty()) {
             return ResponseEntity.ok("Todos los pilotos fueron creados exitosamente.");
         } else {
-            if (hayErroresCriticos){
+            if (hayErroresCriticos && errores.size() == pilotosDTO.size()) { // no se logro cargar ningun píloto
                 return ResponseEntity.badRequest().body("Errores críticos detectados: " + String.join("; ", errores));
             }
             else{
